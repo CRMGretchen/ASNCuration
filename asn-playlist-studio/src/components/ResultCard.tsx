@@ -7,7 +7,6 @@ interface Props {
   asset: ContentAsset;
   contextId: string | null;
   query: string;
-  includePages: boolean;
   playlistItems: PlaylistItem[];
   onAdd: (assetId: string, pageId?: string) => void;
   onRemove: (key: string) => void;
@@ -17,7 +16,6 @@ export default function ResultCard({
   asset,
   contextId,
   query,
-  includePages,
   playlistItems,
   onAdd,
   onRemove,
@@ -65,7 +63,7 @@ export default function ResultCard({
           <p className="result-card__warning-text">⚠ {asset.freshnessWarning}</p>
         )}
 
-        {includePages && asset.pages && asset.pages.length > 0 && (
+        {asset.pages && asset.pages.length > 0 && (
           <button
             type="button"
             className="link-btn"
@@ -75,7 +73,7 @@ export default function ResultCard({
           </button>
         )}
 
-        {includePages && expanded && asset.pages && (
+        {expanded && asset.pages && (
           <ul className="page-list">
             {asset.pages.map((pg) => {
               const key = `${asset.id}::${pg.id}`;

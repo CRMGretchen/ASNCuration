@@ -154,7 +154,6 @@ export default function DiscoverContent({ journey, playlistItems, onAdd, onRemov
             asset={asset}
             contextId={journey.contextId}
             query={query}
-            includePages={includePages}
             playlistItems={playlistItems}
             onAdd={onAdd}
             onRemove={onRemove}

@@ -7,7 +7,6 @@ export const ASSET_TYPE_META: Record<
   video: { label: "Video", icon: "▶", color: "#7C5CFC" },
   lab: { label: "Lab", icon: "🧪", color: "#1F9D6E" },
   module: { label: "Module", icon: "▤", color: "#2E7DD1" },
-  playlist: { label: "Playlist", icon: "≡", color: "#D1832E" },
   assessment: { label: "Assessment", icon: "✓", color: "#C2417A" },
   page: { label: "Page / Unit", icon: "▫", color: "#6B7280" },
 };

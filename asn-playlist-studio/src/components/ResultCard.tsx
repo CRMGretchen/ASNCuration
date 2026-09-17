@@ -27,7 +27,6 @@ export default function ResultCard({
   const isInPlaylist = playlistItems.some(
     (i) => i.assetId === asset.id && !i.pageId
   );
-  const hasPages = includePages && asset.pages && asset.pages.length > 0;
 
   return (
     <article className="result-card">
@@ -66,18 +65,17 @@ export default function ResultCard({
           <p className="result-card__warning-text">⚠ {asset.freshnessWarning}</p>
         )}
 
-        {asset.pages && asset.pages.length > 0 && (
+        {includePages && asset.pages && asset.pages.length > 0 && (
           <button
             type="button"
             className="link-btn"
             onClick={() => setExpanded((v) => !v)}
           >
             {expanded ? "Hide" : "Show"} {asset.pages.length} pages/units
-            {!includePages ? " (enable “include pages/units” to add individually)" : ""}
           </button>
         )}
 
-        {expanded && asset.pages && (
+        {includePages && expanded && asset.pages && (
           <ul className="page-list">
             {asset.pages.map((pg) => {
               const key = `${asset.id}::${pg.id}`;
@@ -87,17 +85,13 @@ export default function ResultCard({
                   <span className="page-list__icon">▫</span>
                   <span className="page-list__title">{pg.title}</span>
                   <span className="page-list__duration">{formatDuration(pg.durationMinutes)}</span>
-                  {hasPages ? (
-                    <button
-                      type="button"
-                      className={`btn btn--tiny ${added ? "btn--added" : "btn--outline"}`}
-                      onClick={() => (added ? onRemove(key) : onAdd(asset.id, pg.id))}
-                    >
-                      {added ? "Added ✓" : "Add page"}
-                    </button>
-                  ) : (
-                    <span className="page-list__locked">requires toggle</span>
-                  )}
+                  <button
+                    type="button"
+                    className={`btn btn--tiny ${added ? "btn--added" : "btn--outline"}`}
+                    onClick={() => (added ? onRemove(key) : onAdd(asset.id, pg.id))}
+                  >
+                    {added ? "Added ✓" : "+ Add to playlist"}
+                  </button>
                 </li>
               );
             })}

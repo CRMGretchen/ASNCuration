@@ -2,7 +2,6 @@ export type AssetType =
   | "video"
   | "lab"
   | "module"
-  | "playlist"
   | "assessment"
   | "page";
 
@@ -15,6 +14,8 @@ export type RecommendedUse =
   | "quick refresher";
 
 export type ContextKind = "credential" | "course" | "event" | "role";
+
+export type ContentLevel = "Beginner" | "Intermediate" | "Advanced";
 
 export interface JourneyContext {
   id: string;
@@ -46,6 +47,9 @@ export interface ContentAsset {
   pages?: PageUnit[]; // present only for modules, to allow "include pages/units"
   freshnessWarning?: string; // governance note, e.g. stale content
   isCanonical: boolean;
+  level: ContentLevel;
+  audience: string;
+  isMicrosoftOfficial: boolean; // vs. partner/community-sourced content
 }
 
 export interface PlaylistItem {

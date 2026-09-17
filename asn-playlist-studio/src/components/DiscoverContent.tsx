@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { contentAssets, getContextById } from "../data/content";
-import type { AssetType, JourneyDefinition, PlaylistItem } from "../types";
+import type { AssetType, ContentLevel, JourneyDefinition, PlaylistItem } from "../types";
 import ResultCard from "./ResultCard";
 import { scoreAsset } from "../utils/relevance";
 import { ASSET_TYPE_META } from "./AssetTypeBadge";
@@ -14,23 +14,29 @@ interface Props {
 
 const ALL_TYPES = Object.keys(ASSET_TYPE_META) as AssetType[];
 const SEARCHABLE_TYPES = ALL_TYPES.filter((t) => t !== "page");
+const LEVEL_OPTIONS: ContentLevel[] = ["Beginner", "Intermediate", "Advanced"];
+const AUDIENCE_OPTIONS = Array.from(new Set(contentAssets.map((a) => a.audience))).sort();
 
 export default function DiscoverContent({ journey, playlistItems, onAdd, onRemove }: Props) {
   const [query, setQuery] = useState("");
   const [activeTypes, setActiveTypes] = useState<Set<AssetType>>(new Set(SEARCHABLE_TYPES));
   const [includePages, setIncludePages] = useState(false);
-  const [contextOnly, setContextOnly] = useState(false);
+  const [officialOnly, setOfficialOnly] = useState(false);
+  const [level, setLevel] = useState<ContentLevel | "">("");
+  const [audience, setAudience] = useState<string>("");
 
   const context = journey.contextId ? getContextById(journey.contextId) : undefined;
 
   const results = useMemo(() => {
     return contentAssets
       .filter((a) => activeTypes.has(a.type))
-      .filter((a) => (contextOnly && journey.contextId ? a.sourceContextIds.includes(journey.contextId) : true))
+      .filter((a) => (officialOnly ? a.isMicrosoftOfficial : true))
+      .filter((a) => (level ? a.level === level : true))
+      .filter((a) => (audience ? a.audience === audience : true))
       .map((a) => ({ asset: a, ...scoreAsset(a, journey.contextId, query) }))
       .filter((r) => (query.trim() ? r.score > 0 : true))
       .sort((a, b) => b.score - a.score);
-  }, [activeTypes, contextOnly, journey.contextId, query]);
+  }, [activeTypes, officialOnly, level, audience, journey.contextId, query]);
 
   function toggleType(t: AssetType) {
     setActiveTypes((prev) => {
@@ -55,7 +61,7 @@ export default function DiscoverContent({ journey, playlistItems, onAdd, onRemov
       <div className="search-bar">
         <input
           className="text-input search-input"
-          placeholder="Search videos, labs, modules, playlists, assessments…"
+          placeholder="Search videos, labs, modules, assessments…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -89,18 +95,50 @@ export default function DiscoverContent({ journey, playlistItems, onAdd, onRemov
             Include pages/units
           </label>
 
-          <label className="toggle" title={!journey.contextId ? "Select a context in step 1 first" : ""}>
+          <label className="toggle">
             <input
               type="checkbox"
-              checked={contextOnly}
-              disabled={!journey.contextId}
-              onChange={(e) => setContextOnly(e.target.checked)}
+              checked={officialOnly}
+              onChange={(e) => setOfficialOnly(e.target.checked)}
             />
             <span className="toggle__track">
               <span className="toggle__thumb" />
             </span>
-            Only show {context ? context.title : "selected context"}
+            Only Microsoft Official Content
           </label>
+        </div>
+      </div>
+
+      <div className="dropdown-row">
+        <div className="field-group field-group--inline">
+          <label className="field-label">Level</label>
+          <select
+            className="text-input"
+            value={level}
+            onChange={(e) => setLevel(e.target.value as ContentLevel | "")}
+          >
+            <option value="">Any level</option>
+            {LEVEL_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="field-group field-group--inline">
+          <label className="field-label">Audience</label>
+          <select
+            className="text-input"
+            value={audience}
+            onChange={(e) => setAudience(e.target.value)}
+          >
+            <option value="">Any audience</option>
+            {AUDIENCE_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -131,3 +169,4 @@ export default function DiscoverContent({ journey, playlistItems, onAdd, onRemov
     </section>
   );
 }
+

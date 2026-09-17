@@ -55,6 +55,9 @@ export const contentAssets: ContentAsset[] = [
       "Meet the New Copilot",
     ],
     isCanonical: true,
+    level: "Beginner",
+    audience: "All employees",
+    isMicrosoftOfficial: true,
   },
   {
     id: "mod-copilot-match-tools",
@@ -82,6 +85,9 @@ export const contentAssets: ContentAsset[] = [
       { id: "pg-practice-scenario", title: "Practice: Pick the Right Tool", durationMinutes: 5 },
     ],
     isCanonical: true,
+    level: "Intermediate",
+    audience: "Information workers",
+    isMicrosoftOfficial: true,
   },
   {
     id: "lab-scout-research",
@@ -102,6 +108,9 @@ export const contentAssets: ContentAsset[] = [
       "Multi-Step Research with Scout",
     ],
     isCanonical: true,
+    level: "Intermediate",
+    audience: "Power users",
+    isMicrosoftOfficial: true,
   },
   {
     id: "vid-cowork-teamwork",
@@ -118,6 +127,9 @@ export const contentAssets: ContentAsset[] = [
     tags: ["Cowork", "Teamwork", "Demo"],
     breadcrumb: ["September 30 Super App Moment", "Cowork for Teams", "Cowork in Action"],
     isCanonical: true,
+    level: "Beginner",
+    audience: "Customer Success Managers",
+    isMicrosoftOfficial: true,
   },
   {
     id: "mod-code-fundamentals",
@@ -140,6 +152,9 @@ export const contentAssets: ContentAsset[] = [
     ],
     freshnessWarning: "Last verified over 90 days ago — confirm screenshots still match UI.",
     isCanonical: true,
+    level: "Advanced",
+    audience: "Developers",
+    isMicrosoftOfficial: false,
   },
   {
     id: "assess-copilot-scout-check",
@@ -160,22 +175,9 @@ export const contentAssets: ContentAsset[] = [
       "Knowledge Check: Copilot vs. Scout",
     ],
     isCanonical: true,
-  },
-  {
-    id: "playlist-field-readiness-snapshot",
-    type: "playlist",
-    title: "Field Readiness Snapshot: Super App in 20 Minutes",
-    summary:
-      "An existing curated playlist giving field sellers a rapid overview of all four Super App surfaces.",
-    durationMinutes: 20,
-    owner: "Field Enablement",
-    lastUpdated: "2025-09-05",
-    sourceLabel: "Launch Hub: September 30 Super App Moment",
-    sourceContextIds: ["ctx-super-app-launch", "ctx-cowork-role"],
-    recommendedUse: "short intro",
-    tags: ["Playlist", "Field Readiness", "Overview"],
-    breadcrumb: ["September 30 Super App Moment", "Launch Hub", "Field Readiness Snapshot"],
-    isCanonical: true,
+    level: "Intermediate",
+    audience: "Information workers",
+    isMicrosoftOfficial: true,
   },
   {
     id: "vid-credential-why-it-matters",
@@ -192,6 +194,9 @@ export const contentAssets: ContentAsset[] = [
     tags: ["Credential", "Career", "Copilot"],
     breadcrumb: ["Microsoft 365 Copilot Credential", "Why It Matters"],
     isCanonical: true,
+    level: "Beginner",
+    audience: "All employees",
+    isMicrosoftOfficial: true,
   },
   {
     id: "lab-cowork-project-setup",
@@ -208,6 +213,9 @@ export const contentAssets: ContentAsset[] = [
     tags: ["Cowork", "Lab", "Project Management"],
     breadcrumb: ["September 30 Super App Moment", "Cowork for Teams", "Stand Up a Cowork Project"],
     isCanonical: true,
+    level: "Intermediate",
+    audience: "Customer Success Managers",
+    isMicrosoftOfficial: true,
   },
   {
     id: "mod-scout-prompting",
@@ -230,6 +238,9 @@ export const contentAssets: ContentAsset[] = [
       { id: "pg-scout-checklist", title: "Pre-Flight Prompting Checklist", durationMinutes: 3 },
     ],
     isCanonical: true,
+    level: "Intermediate",
+    audience: "Power users",
+    isMicrosoftOfficial: true,
   },
   {
     id: "vid-launch-customer-story",
@@ -246,6 +257,9 @@ export const contentAssets: ContentAsset[] = [
     tags: ["Customer Story", "Launch", "Case Study"],
     breadcrumb: ["September 30 Super App Moment", "Launch Hub", "Contoso Customer Story"],
     isCanonical: true,
+    level: "Beginner",
+    audience: "Sales & Field",
+    isMicrosoftOfficial: false,
   },
   {
     id: "mod-governance-considerations",
@@ -263,6 +277,9 @@ export const contentAssets: ContentAsset[] = [
     breadcrumb: ["Super App Admin Foundations", "Governance & Data Boundaries"],
     freshnessWarning: "Content predates the September 30 launch — verify policy details before reuse.",
     isCanonical: true,
+    level: "Advanced",
+    audience: "IT Admins",
+    isMicrosoftOfficial: true,
   },
   {
     id: "assess-credential-final",
@@ -279,6 +296,9 @@ export const contentAssets: ContentAsset[] = [
     tags: ["Credential", "Assessment", "Copilot"],
     breadcrumb: ["Microsoft 365 Copilot Credential", "Final Assessment"],
     isCanonical: true,
+    level: "Advanced",
+    audience: "All employees",
+    isMicrosoftOfficial: true,
   },
 ];
 
